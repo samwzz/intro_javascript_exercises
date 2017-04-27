@@ -34,12 +34,13 @@ Student.prototype.courseLoad = function(){
 };
 
 Student.prototype.hasConflict = function(newCourse) {
+  let isConflict = false;
   this.courses.forEach(course => {
     if (newCourse.conflictsWith(course)) {
-      return true;
+      isConflict = true;
     }
   });
-  return false;
+  return isConflict;
 };
 
 function Course(name, department, credits, timeBlock, daysOfWeek) {
@@ -56,10 +57,11 @@ Course.prototype.addStudent = function(student) {
 };
 
 Course.prototype.conflictsWith = function(course) {
+  let isConflict = false;
   this.daysOfWeek.forEach(day => {
-    if (course.daysOfWeek.includes(day) && this.timeBlock === course.timeBlock) {
-      return true;
+    if (course.daysOfWeek.includes(day) && (this.timeBlock === course.timeBlock)) {
+      isConflict = true;
     }
   });
-  return false;
+  return isConflict;
 };
